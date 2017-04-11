@@ -1,0 +1,251 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.container {
+  padding-top: 30px;
+}
+
+.modal {
+  background: rgba(0,0,0,0.4);
+  height: 100%;
+  width: 100%;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.modal-content {
+  background: white;
+  border: 5px solid #598796;
+  font-size: 18px;
+  padding-top: 40px;
+  padding-bottom: 15px;
+  width: 50%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.modal-content .close {
+  cursor: pointer;
+  font-size: 26px;
+  font-weight: bold;
+
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
+.modal-content form div {
+  margin-bottom: 15px;
+}
+
+.modal-content form .error {
+  color: #9d2424;
+  font-size: 13px;
+  margin: 5px 0 0 37%;
+}
+
+.modal-content label,
+.modal-content input[type=text] {
+  display: inline-block;
+}
+
+.modal-content label {
+  text-align: right;
+  width: 33%;
+}
+
+.modal-content input[type=text] {
+  font-size: 18px;
+  height: 30px;
+  margin-left: 20px;
+  width: 50%;
+}
+
+.submit {
+  height: 40px;
+  margin: 25px auto 0;
+  width: 100px;
+}
+
+.submit input {
+  height: 100%;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.options #add-new {
+  background: #598796;
+  border: 0;
+  color: #fff;
+  height: 30px;
+  width: 150px;
+}
+
+.options,
+.movies {
+  margin: 0 auto;
+  width: 75%;
+}
+
+.options {
+  margin-bottom: 5px;
+}
+
+.options .filter-movies {
+  float: right;
+  height: 30px;
+}
+
+.filter-movies input {
+  height: 100%;
+  padding: 5px;
+}
+
+.filter-movies select {
+  height: 100%;
+}
+
+.movies-status {
+  display: inline-block;
+  margin-left: 50px;
+}
+
+.movies {
+  border-collapse: collapse;
+}
+
+.movies th, .movies td {
+  border: 1px solid #ddd;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.movies td.editing {
+  padding-top: 20px;
+  vertical-align: top;
+}
+
+.movies td.editing input {
+  padding-left: 5px;
+  width: 100%;
+}
+
+.movies tr {
+  text-align: left;
+}
+
+.movies thead tr {
+  text-transform: uppercase;
+}
+
+.movies tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+td .edit,
+td .delete,
+td .save,
+td .cancel {
+  cursor: pointer;
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+td .edit,
+td .save {
+  color: #3b7e94;
+  margin-bottom: 4px;
+}
+
+td .delete,
+td .cancel {
+  color: darkred;
+}
+
+.editing .error {
+  color: #9d2424;
+}
+.pagination {
+  text-align: center;
+}
+
+.pagination li {
+  border: 1px solid #ddd;
+  display: inline-block;
+  list-style: none;
+  margin-right: 5px;
+  transition: background .4s;
+}
+
+.pagination li:hover:not(.active) {
+  background: #ddd;
+}
+
+.pagination li a {
+  color: #000;
+  display: inline-block;
+  padding: 5px 15px;
+  text-decoration: none;
+}
+
+.pagination .active {
+  background: #598796;
+  border: 1px solid #598796;
+}
+
+.pagination .active a {
+  color: #fff;
+}
+
+.stars {
+  display: inline-block;
+  margin: 0 0 0 16px;
+
+  position: relative;
+  top: 7px;
+}
+
+.stars .star-icon {
+  color: #ddd;
+  cursor: pointer;
+  font-size: 28px;
+  margin-right: 5px;
+}
+
+.star-icon.active,
+.star-icon.hover {
+  color: orange;
+}
+
+.inline-stars,
+.table-stars {
+  margin-left: 0;
+  top: 0;
+}
+
+.inline-stars .star-icon,
+.table-stars .star-icon {
+  font-size: 20px;
+  margin-right: 2px;
+}
+
+.table-stars .star-icon {
+  cursor: auto;
+}
