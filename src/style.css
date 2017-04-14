@@ -70,9 +70,11 @@ body {
 }
 
 .modal-content input[type=text] {
+  border: 1px solid black;
   font-size: 18px;
   height: 30px;
   margin-left: 20px;
+  padding-left: 5px;
   width: 50%;
 }
 
