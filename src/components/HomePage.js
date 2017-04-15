@@ -115,7 +115,7 @@ export class HomePage extends React.Component {
                     </button>
                     {isFiltering &&
                         <span className="movies-status">
-                            {moviesLen} {moviesLen > 1 ? 'movies' : 'movie'} found.
+                            {moviesLen || 'No'} {moviesLen > 1 ? 'movies' : 'movie'} found.
                         </span>
                     }
                     <div className="filter-movies">

@@ -67,16 +67,9 @@ export function isEditingMovie(movie) {
 
 export function saveMovie(movie) {
     let type = '';
-    movie = Object.assign({}, movie);
-
 
     if (!movie.id) {
         type = 'add';
-    }
-    
-    if (typeof movie.genres === 'string') {
-        movie.genres = movie.genres.split(',')
-                        .map(genre => genre.trim().toLowerCase());
     }
 
     return (dispatch, getState) => {

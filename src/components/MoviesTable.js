@@ -1,8 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+
 import { deleteMovie, cancelMovieEdit, saveMovie } from '../actions/actions';
 import MovieRowData from './MovieRowData';
 import MovieRowForm from './MovieRowForm';
+
+import isEqual from 'lodash/isEqual';
 
 const propTypes = {
     movies: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -16,7 +19,6 @@ export class MoviesTable extends React.Component {
         this.state = {
             movies: [],
             errors: [],
-            saving: false,
             deleting: false
         }
 
@@ -30,12 +32,28 @@ export class MoviesTable extends React.Component {
         this.validateForm = this.validateForm.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        let hasSameState = isEqual(this.state, nextState);
+
+        let hasSameEditStatusAndMovie = this.props.moviesByPage.every((movie, i) => {
+            const nextMovie = nextProps.moviesByPage.find(m => m.id === movie.id) || {};
+
+            return movie.isEditing === nextMovie.isEditing && movie.id === nextMovie.id;
+        })
+
+        if (this.props.moviesByPage.length === nextProps.moviesByPage.length && hasSameState && hasSameEditStatusAndMovie) {
+            return false;
+        }
+
+        return true;
+    }
+
     componentWillReceiveProps(nextProps) {
-        const { saving, deleting } = this.state;
+        const { deleting } = this.state;
         const prevLen = this.props.movies.length;
         const nextLen = nextProps.movies.length;
 
-        if (!deleting && (prevLen !== nextLen || saving)) {
+        if (!deleting && prevLen !== nextLen) {
             const movies = nextProps.movies.map(movie => {
                 return {
                     id: movie.id,
@@ -47,14 +65,16 @@ export class MoviesTable extends React.Component {
             });
 
             this.setState({movies});
+            
         }
 
-        if (deleting && prevLen > nextLen) {
+        if (deleting  && prevLen > nextLen) {
             this.setState({
                 movies: this.state.movies.filter(movie => movie.id !== deleting),
                 deleting: false
             });
         }
+
     }
 
     handleInputChange(movieId, event) {
@@ -103,10 +123,20 @@ export class MoviesTable extends React.Component {
             return;
         }
 
-        movie = Object.assign({}, movie, {releaseYear: parseInt(movie.releaseYear, 10)});
+        if (typeof movie.genres === 'string') {
+            movie.genres = movie.genres.split(',')
+                        .map(genre => genre.trim().toLowerCase());
+        }
 
-        this.setState({saving: movieId});
-        this.props.dispatch(saveMovie(movie));
+        // Check if movie was modified before saving.
+        const propsMovie = this.props.movies.find(movie => movie.id === movieId);
+        delete propsMovie.isEditing;
+
+        if (!isEqual(propsMovie, movie)) {
+            this.props.dispatch(saveMovie(movie));
+        } else {
+            this.props.dispatch(cancelMovieEdit(movie.id))
+        }
     }
 
     handleCancel(movieId, event) {

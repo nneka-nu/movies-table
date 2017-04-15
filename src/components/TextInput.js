@@ -7,7 +7,7 @@ const propTypes = {
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         genres: PropTypes.oneOfType([PropTypes.array, PropTypes.string]).isRequired,
-        releaseYear: PropTypes.number.isRequired,
+        releaseYear: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
         rating: PropTypes.number.isRequired,
         isEditing: PropTypes.bool
     }).isRequired,

@@ -31,6 +31,14 @@ class Rating extends React.Component {
         this.handleStarMouseLeave = this.handleStarMouseLeave.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.rating === nextState.rating) {
+            return false;
+        }
+
+        return true;
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.clearRating) {
             this.setState({

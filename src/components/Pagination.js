@@ -13,6 +13,16 @@ class Pagination extends React.Component {
         this.handlePageClick = this.handlePageClick.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        const { currentPage, numOfPages } = this.props;
+
+        if (currentPage === nextProps.currentPage && numOfPages === nextProps.numOfPages) {
+            return false;
+        }
+
+        return true
+    }
+
     handlePageClick(event) {
         event.preventDefault();
         const id = event.target.id;
